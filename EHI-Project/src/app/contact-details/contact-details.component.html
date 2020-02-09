@@ -1,3 +1,99 @@
-<p>
-  contact-details works!
-</p>
+<div>
+  <form #contactForm="ngForm">
+      <table>
+          <thead *ngIf="bUpdate && !contactForm.valid">
+              <tr>
+                  <th colspan="100%" class="text-center red"> Please fill all required fields with
+                      valid values..</th>
+              </tr>
+          </thead>        
+          <thead>
+              <tr>
+                  <th colspan="100%" class="text-center">Contact Details</th>
+              </tr>
+              <tr>
+                  <th>
+                      <a id="b1" (click)="addContact()" title="Add New" [class.disabled]="selectedIndex != undefined">+ <u>Add</u></a>
+                  </th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Phone Number</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody *ngFor="let record of contactDetailsList; let ind=index;">
+              <tr>
+                  <td class="text-center">
+                      <a id="b2-{{ind}}" *ngIf="ind != selectedIndex" (click)="editDetails(ind)" title="Edit"><u>Edit</u></a>&nbsp;	
+                      <a id="b3-{{ind}}" *ngIf="ind != selectedIndex" (click)="deleteDetails(ind)" title="Delete"><u>Delete</u></a>&nbsp;	
+                      <a id="b4-{{ind}}" *ngIf="ind == selectedIndex" (click)="updateDetails(ind,contactForm.valid)"
+                          title="{{bAdd ? 'Save' : 'Update'}}"><u>{{bAdd ? 'Save' : 'Update'}}</u></a>&nbsp;	
+                      <a id="b5-{{ind}}" *ngIf="ind == selectedIndex" (click)="cancelDetails(ind)" title="Cancel"><u>Cancel</u></a>
+                  </td>
+                  <td class="text-center">
+                      <span *ngIf="ind != selectedIndex">{{record.sFirstName}}</span>
+                      <div *ngIf="ind === selectedIndex">
+                          <input [ngClass]="{'redBorder' : (fName.touched && !fName.valid)}" id="i1-{{ind}}" type="text" name="fName-{{ind}}" [(ngModel)]="record.sFirstName"
+                         #fName="ngModel" maxlength="30" required [RegexValidator]='"^[a-zA-Z]{1,30}$"'>
+                          <div *ngIf="fName.touched && !fName.valid" class="errorStrip">
+                              <div *ngIf="fName.hasError('required')">First Name is required</div>
+                          </div>
+                      </div>
+                  </td>
+                  <td>
+                      <span *ngIf="ind != selectedIndex">{{record.sLastName}}</span>
+                      <div *ngIf="ind === selectedIndex">
+                          <input [ngClass]="{'redBorder' : (lName.touched && !lName.valid)}" id="i2-{{ind}}" type="text" name="lName-{{ind}}" [(ngModel)]="record.sLastName"
+                          #lName="ngModel" maxlength="30" required [RegexValidator]='"^[a-zA-Z]{1,30}$"'>
+                          <div *ngIf="lName.touched && !lName.valid" class="errorStrip">
+                              <div *ngIf="lName.hasError('required')">Last Name is required</div>
+                          </div>
+                      </div>
+                  </td>
+                  <td>
+                      <span *ngIf="ind != selectedIndex">{{record.sEmailId}}</span>
+                      <div *ngIf="ind === selectedIndex">
+                          <input [ngClass]="{'redBorder' : (email.touched && !email.valid)}" id="i3-{{ind}}" type="email" name="email-{{ind}}" [(ngModel)]="record.sEmailId"
+                              pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" #email="ngModel" maxlength="100"
+                              required>
+                          <div *ngIf="email.touched && !email.valid" class="errorStrip">
+                              <div *ngIf="email.hasError('required')">Email is required</div>
+                              <div *ngIf="email.hasError('pattern')">Enter a valid Email</div>
+                          </div>
+                      </div>
+                  </td>
+                  <td>
+                      <span *ngIf="ind != selectedIndex">{{record.sPhoneNumber}}</span>
+                      <div *ngIf="ind === selectedIndex">
+                          <input [ngClass]="{'redBorder' : (phone.touched && !phone.valid)}" id="i4-{{ind}}" type="text" name="phone-{{ind}}" [(ngModel)]="record.sPhoneNumber"
+                               pattern="^[6789]{1,1}[0-9]{9,9}$" #phone="ngModel" minlength="10" maxlength="10" 
+                              required [RegexValidator]='"^[0-9]$"'>
+                          <div *ngIf="phone.touched && !phone.valid" class="errorStrip">
+                              <div *ngIf="phone.hasError('required')">Phone Number is required</div>
+                              <div *ngIf="phone.hasError('pattern')">Enter a valid Phone Number</div>
+                          </div>
+                      </div>
+                  </td>
+                  <td>
+                      <span *ngIf="ind != selectedIndex">{{record.sStatus}}</span>
+                      <div *ngIf="ind === selectedIndex">
+                          <select [ngClass]="{'redBorder' : (status.touched && !status.valid)}" id="i5-{{ind}}" name="status-{{ind}}" [(ngModel)]="record.sStatus" #status="ngModel"
+                              required>
+                              <option *ngFor="let val of statusArr">{{val}}</option>
+                          </select>
+                          <div *ngIf="status.touched && !status.valid" class="errorStrip">
+                              <div *ngIf="status.hasError('required')">Status is required</div>
+                          </div>
+                      </div>
+                  </td>
+              </tr>
+          </tbody>
+          <tbody *ngIf="contactDetailsList && !contactDetailsList.length">
+              <tr>
+                  <th colspan="100%" class="text-center black"> No details has been found</th>
+              </tr>
+          </tbody>
+      </table>
+  </form>
+</div>
