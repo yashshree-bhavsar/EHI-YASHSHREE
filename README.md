@@ -1,5 +1,11 @@
 # EHI-YASHSHREE
 
+# 1) install npm in EHI-Project folder using command -- (npm install)
+
+# 2) Run the project using command -- (ng serve)
+
+# 3) open http://localhost:4200/#/ in browser
+
 # Folder Structure of Application
 
 i) src/app -- root Module of the application
@@ -15,10 +21,6 @@ vii) src/app/directives/regex-validator.directive.ts --  contains Directive clas
 viii).angular-cli.json -- this file contains configuration of project
 
 ix)package.json -- contains dependencies related to project
-
-# install npm using command -- (npm install)
-
-# use (ng serve) command to run the project
 
 # build command
 
