@@ -1,6 +1,16 @@
 # EHI-YASHSHREE
 
-# 1) install npm in EHI-Project folder using command -- (npm install)
+## Steps to run an Angular application
+
+# 1) clone repository using command (git clone https://github.com/yashshree-bhavsar/EHI-YASHSHREE.git)
+
+# 2) go to EHI-Project folder
+
+# 2) Download and install node from https://nodejs.org/en/
+
+# 1) install npm using command -- (npm install)
+
+# 4) install angular cli using command -- (npm install -g @angular/cli)
 
 # 2) Run the project using command -- (ng serve)
 
